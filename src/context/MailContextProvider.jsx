@@ -1,21 +1,30 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import { Outlet, useSearchParams } from "react-router-dom";
 import { mailService } from "../services/mailService.js";
 import { Loading } from "../cmps/Layout/Loading/Loading.jsx";
 
-const MailContext = createContext({
+export const MailContext = createContext({
     viewedMail: [],
-    addMail: () => { },
-    updateMail: () => { },
-    removeMail: () => { },
-    getMailById: () => { },
+    addMail: () => {
+    },
+    updateMail: () => {
+    },
+    removeMail: () => {
+    },
+    getMailById: () => {
+    },
     search: "",
-    onSearch: () => { },
-    clearSearch: () => { },
+    onSearch: () => {
+    },
+    clearSearch: () => {
+    },
     sortAsc: {},
-    toggleSortAsc: () => { },
-    addSortAsc: () => { },
-    removeSortAsc: () => { },
+    toggleSortAsc: () => {
+    },
+    addSortAsc: () => {
+    },
+    removeSortAsc: () => {
+    },
 })
 
 export const MailContextProvider = () => {
@@ -94,8 +103,7 @@ export const MailContextProvider = () => {
         loadMails()
 
     }, [])
-
-    function filterByFolder(m) {
+    const filterByFolder = useCallback((m) => {
         switch (folder) {
             case "inbox":
                 return !m.removedAt
@@ -112,10 +120,11 @@ export const MailContextProvider = () => {
             default:
                 return true
         }
-    }
+    }, [folder])
 
     useEffect(() => {
         if (!_mail) return;
+
         function loadViewedMail() {
             setViewedMail(() => {
                 let mail = [..._mail].filter(filterByFolder);
@@ -161,11 +170,10 @@ export const MailContextProvider = () => {
 
     return (
         <MailContext.Provider value={value}>
-            {viewedMail === null ? <Loading /> : <Outlet />}
+            {viewedMail === null ? <Loading/> : <Outlet/>}
         </MailContext.Provider>
     )
 };
-
 
 export const useMailContext = () => {
     const context = useContext(MailContext);

@@ -1,35 +1,7 @@
 import { useMailContext } from "../../context/MailContextProvider.jsx";
-import {
-    // LucideBug,
-    // LucideClipboard,
-    // LucideMailWarning,
-    LucideMailbox,
-    LucideSend,
-    LucideStar,
-    LucideTrash2
-} from "lucide-react";
 import { classnames } from "../../utils/classnames.js";
 import { useUrl } from "../../hooks/useUrl.jsx";
-
-export const mappedFilterFolders = {
-    "Inbox": "inbox",
-    "Starred": "starred",
-    "Sent": "sent",
-    // "Drafts": "drafts",
-    "Trash": "trash",
-    // "Spam": "spam",
-    // "Important": "important"
-}
-
-const mappedFilterIcons = {
-    "Inbox": LucideMailbox,
-    "Starred": LucideStar,
-    "Sent": LucideSend,
-    // "Drafts": LucideClipboard,
-    "Trash": LucideTrash2,
-    // "Spam": LucideBug,
-    // "Important": LucideMailWarning
-}
+import { mappedFilterFolders, mappedFilterIcons } from "./MailFolderList.constants.js";
 export function MailFolderList() {
     const { updateUrl } = useUrl()
     const { folder, onSelectFolder, viewedCount } = useMailContext()
