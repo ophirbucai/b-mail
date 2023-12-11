@@ -1,4 +1,5 @@
-import { useNavigate, useParams } from "react-router-dom";
+import notFoundImage from '../../assets/imgs/undraw_void_-3-ggu.svg';
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useMailContext } from "../../context/MailContextProvider.jsx";
 import { useEffect, useState } from "react";
 import { Loading } from "../Layout/Loading/Loading.jsx";
@@ -21,6 +22,7 @@ export function MailDetails() {
                 const mail = await mailService.getById(mailId)
                 setMail(mail)
             } catch (err) {
+                setMail(undefined);
                 console.log(err);
             }
         }
@@ -52,7 +54,7 @@ export function MailDetails() {
 
     return (
         <div className="mail-details">
-            {!mail ? <Loading /> : (
+            {mail === null ? <Loading /> : mail ? (
                 <div className="mail-details-container">
                     <div className="mail-details-header">
                         <button onClick={() => navigate(getUrl("/mail"))} className="back-button simple-button"><span>←</span>{" "}<span>Back</span></button>
@@ -84,6 +86,14 @@ export function MailDetails() {
                         </div>
                     </div>
                 </div>
+            ) : (
+                <section className="mail-details-not-found flex column gap10 auto-center full-grow">
+                    <img className="m20" src={notFoundImage} width="20%" alt="A man looking into the void" />
+                    <h1>Mail Not Found</h1>
+                    <p>{`Sorry, we couldn't find the mail you were looking for.`}</p>
+                    <p>It may have been removed or deleted.</p>
+                    <p>Try going back to the <Link to={getUrl("/mail")}><b>Mail</b></Link> page.</p>
+                </section>
             )}
         </div>
     )

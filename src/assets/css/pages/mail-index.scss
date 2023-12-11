@@ -7,12 +7,13 @@
     //aside {
     //  margin: 10px 10px 0;
     //}
-    a {
+    .mail-index-compose-button {
       position: fixed;
-      bottom: 0;
-      margin: 0.75em 0.75em 4em;
+      bottom: 3em;
+      margin: 0.75em;
       right: 0;
-      //padding: 0.5em 0.75em;
+      z-index: 1;
+      padding: 0.5em 0.75em;
     }
     .mail-folder-list {
       position: fixed;

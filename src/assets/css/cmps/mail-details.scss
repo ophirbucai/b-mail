@@ -5,6 +5,14 @@
   flex-grow: 1;
   background-color: #fcfcfc;
 
+  .mail-details-not-found {
+    padding-bottom: 15vh;
+
+    > :last-child {
+      margin-top: 1em;
+    }
+
+  }
 
   .mail-details-container {
     //border-radius: 0.5em;
@@ -17,11 +25,13 @@
       border-bottom: 1px solid #ccc5;
       display: flex;
       align-items: center;
+
       .back-button {
-          margin-right: auto;
-          cursor: pointer;
+        margin-right: auto;
+        cursor: pointer;
 
       }
+
       button {
         padding: 0.5em;
       }
