@@ -1,0 +1,45 @@
+.app-header {
+    background: #1ea2e9;
+    color: white;
+
+    section.container {
+        display: flex;
+        align-items: center;
+
+    }
+
+    h1.logo {
+        flex-grow: 1;
+        font-weight: 600;
+    }
+
+    .back {
+        flex-grow: 1;
+    }
+
+    nav a:not(:last-child) {
+        margin-right: 10px;
+    }
+
+    section.container>section {
+        flex-grow: 1;
+    }
+
+    nav li a.active {
+        cursor: default;
+        pointer-events: none;
+        color: #000000;
+        background: white;
+        border-radius: 5px;
+        padding: 5px 10px;
+    }
+    nav li a {
+        color: white;
+        text-decoration: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+    }
+    nav li a:not(.active):hover {
+        background: rgba(255, 255, 255, 0.2);
+    }
+}

@@ -1,0 +1,7 @@
+button.mail-star {
+  &.starred svg {
+    fill: #f1a530;
+    stroke: #f1a530;
+    stroke-width: .2em;
+  }
+}

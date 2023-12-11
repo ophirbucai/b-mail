@@ -1,0 +1,16 @@
+.mail-filter-asc-buttons {
+  background-color: $color-white;
+  border-radius: 0.5em  0.5em 0 0;
+  width: 100%;
+  .filter-asc button.filter-asc-remove {
+    opacity: 0;
+    max-width: 0;
+    margin-left: 5px;
+  }
+  .filter-asc:hover {
+    button.filter-asc-remove {
+      max-width: 1em;
+      opacity: 1;
+    }
+  }
+}
