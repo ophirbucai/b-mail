@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useSearchParams } from "react-router-dom";
 import { mailService } from "../services/mailService.js";
 import { Loading } from "../cmps/Layout/Loading/Loading.jsx";
 
@@ -19,6 +19,7 @@ const MailContext = createContext({
 })
 
 export const MailContextProvider = () => {
+    const [searchParams] = useSearchParams();
     const [_mail, _setMail] = useState(null);
     const [viewedMail, setViewedMail] = useState(null);
     const [search, setSearch] = useState("");
@@ -27,6 +28,7 @@ export const MailContextProvider = () => {
         subject: false,
         to: false,
     });
+    const [folder, setFolder] = useState(searchParams.get("folder") || "inbox");
 
     const value = {
         viewedMail,
@@ -75,6 +77,16 @@ export const MailContextProvider = () => {
                 return newSortAsc
             })
         },
+        /* Folder */
+        folder,
+        onSelectFolder: (folder) => {
+            if (["inbox", "starred", "sent", "drafts", "trash"].includes(folder)) {
+                setFolder(folder)
+            } else {
+                setFolder("inbox")
+            }
+        },
+        viewedCount: viewedMail?.length || 0,
     }
 
 
@@ -83,11 +95,30 @@ export const MailContextProvider = () => {
 
     }, [])
 
+    function filterByFolder(m) {
+        switch (folder) {
+            case "inbox":
+                return !m.removedAt
+            case "starred":
+                return m.isStarred && !m.removedAt
+            case "sent":
+                return m.sentAt && !m.removedAt
+            case "drafts":
+                return m.from === "me" && m.removedAt
+            case "trash":
+
+                //Todo: check why this is not working
+                return m.removedAt
+            default:
+                return true
+        }
+    }
+
     useEffect(() => {
         if (!_mail) return;
         function loadViewedMail() {
             setViewedMail(() => {
-                let mail = [..._mail]
+                let mail = [..._mail].filter(filterByFolder);
                 if (search) {
                     mail = mail.filter(mail => {
                         return Object.keys(mail).some(key => {
@@ -115,7 +146,7 @@ export const MailContextProvider = () => {
 
         loadViewedMail()
 
-    }, [_mail, search, sortAsc])
+    }, [_mail, search, sortAsc, folder])
 
     async function loadMails() {
         try {
