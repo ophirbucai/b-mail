@@ -4,23 +4,13 @@
   background-color: #fcfcfc;
   border-radius: 0.5em;
   bottom: 0;
-  margin-bottom: 0.5em;
   right: 0;
   margin-inline: 0.5em;
   overflow: hidden;
-  animation: slide-up 0.3s ease-in-out 75ms backwards;
-  transition: transform 0.3s ease-in-out;
+  animation: slide-up 0.3s ease-in-out forwards 1;
 
-  @keyframes slide-up {
-    from {
-      transform: translate(0, 100%);
-    }
-    to {
-      transform: translate(0, 0);
-    }
-  }
   &.closing {
-    transform: translate(0, 100%);
+    animation: slide-down 0.3s ease-in-out forwards 1;
   }
 
   header {

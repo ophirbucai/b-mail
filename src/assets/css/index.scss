@@ -4,12 +4,15 @@
 @import "basics/layout";
 @import "basics/animations";
 
+/* Setup */
+@import "setup/variables";
+
 /* Pages */
 @import "pages/home";
 @import "pages/mail-index";
 
 /* Components */
-@import "cmps/app-header.scss";
+@import "cmps/app-header";
 @import "cmps/mail-compose.scss";
 @import "cmps/mail-filter-search";
 @import "cmps/mail-filter-asc-buttons";
@@ -17,5 +20,6 @@
 @import "cmps/mail-preview";
 @import "cmps/mail-details";
 @import "cmps/mail-star-button";
+@import "cmps/mail-folder-list";
 @import "cmps/loading";
 
