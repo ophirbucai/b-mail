@@ -1,0 +1,44 @@
+.mail-details {
+
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  background-color: #fcfcfc;
+
+
+  .mail-details-container {
+    //border-radius: 0.5em;
+
+    .mail-details-header {
+      padding: 0.5em 1.5em 0.25em 1em;
+      border-color: #ccc5;
+      //margin-bottom: 0;
+      background-color: #f5f5f5;
+      border-bottom: 1px solid #ccc5;
+      display: flex;
+      align-items: center;
+      .back-button {
+          margin-right: auto;
+          cursor: pointer;
+
+      }
+      button {
+        padding: 0.5em;
+      }
+    }
+  }
+
+  .mail-details-body {
+    .mail-details-body-content {
+      word-break: break-word;
+      padding: 1em;
+      font-size: 1.2em;
+      line-height: 1.5em;
+      color: #333;
+      -webkit-hyphens: auto;
+      -moz-hyphens: auto;
+      -ms-hyphens: auto;
+      hyphens: auto;
+    }
+  }
+}
