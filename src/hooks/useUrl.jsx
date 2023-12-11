@@ -17,7 +17,13 @@ export function useUrl() {
         setSearchParams(searchParams);
     }
 
-    function getUrl(url) {
+    function getUrl(url, params) {
+        if (params) {
+            Object.keys(params).forEach(key => {
+                if (params[key]) searchParams.set(key, params[key]);
+                else searchParams.delete(key);
+            })
+        }
         return `${url}${searchParams.size ? "?" : ""}${searchParams.toString()}`
     }
 

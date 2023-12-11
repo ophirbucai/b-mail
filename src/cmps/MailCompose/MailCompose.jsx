@@ -6,14 +6,13 @@ import { useMailContext } from "../../context/MailContextProvider.jsx";
 import { useUrl } from "../../hooks/useUrl.jsx";
 import { useNavigate } from "react-router-dom";
 import { classnames } from "../../utils/classnames.js";
+import { user } from "../../context/User.jsx";
 
 const mailSchema = z.object({
     to: z.string().email("Please enter a valid Email address"),
     subject: z.string().optional(),
     body: z.string().min(2, "Your message is too short!")
 })
-
-const fromMail = "testing@bmail.io";
 export function MailCompose() {
     const { getUrl, updateUrl, searchParams, deleteUrl } = useUrl();
     const { addMail } = useMailContext();
@@ -54,7 +53,7 @@ export function MailCompose() {
         e.preventDefault();
         validate(); // Validate all fields
         try {
-            const mail = await mailService.save({ ...formValues, from: fromMail });
+            const mail = await mailService.save({ ...formValues, from: user.email });
             addMail(mail);
             onDelayedClose();
         } catch (err) {
@@ -107,7 +106,7 @@ export function MailCompose() {
             <form onSubmit={sendMail} className="simple-form">
                 <label>
                     <span>From</span>
-                    <input defaultValue={fromMail} disabled/>
+                    <input defaultValue={user.email} disabled/>
                 </label>
                 <label className="bottom-divider" data-error={formErrors.to || undefined}>
                     <span>To</span>

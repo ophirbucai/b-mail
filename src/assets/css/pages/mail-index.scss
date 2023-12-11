@@ -2,7 +2,6 @@
 
 .mail-index {
   background-color: #f5f5f5;
-  // Todo: Convert to mixin
   @include for-mobile {
     flex-direction: column;
     //aside {

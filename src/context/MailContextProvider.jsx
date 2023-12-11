@@ -2,6 +2,7 @@ import { createContext, useCallback, useContext, useEffect, useState } from "rea
 import { Outlet, useSearchParams } from "react-router-dom";
 import { mailService } from "../services/mailService.js";
 import { Loading } from "../cmps/Layout/Loading/Loading.jsx";
+import { user } from "./User.jsx";
 
 export const MailContext = createContext({
     viewedMail: [],
@@ -110,12 +111,10 @@ export const MailContextProvider = () => {
             case "starred":
                 return m.isStarred && !m.removedAt
             case "sent":
-                return m.sentAt && !m.removedAt
+                return m.sentAt && m.from === user.email && !m.removedAt
             case "drafts":
                 return m.from === "me" && m.removedAt
             case "trash":
-
-                //Todo: check why this is not working
                 return m.removedAt
             default:
                 return true
@@ -155,7 +154,7 @@ export const MailContextProvider = () => {
 
         loadViewedMail()
 
-    }, [_mail, search, sortAsc, folder])
+    }, [_mail, search, sortAsc, folder, filterByFolder])
 
     async function loadMails() {
         try {
