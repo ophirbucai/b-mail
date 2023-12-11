@@ -1,0 +1,49 @@
+
+.mail-folder-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  button {
+    padding: .5em 1.5em .5em 2.5em;
+    margin-inline-end: max(20%, 3em);
+    border: none;
+    width: 180px;
+    background-color: transparent;
+    border-radius: 0 2em 2em 0;
+    transition: none;
+
+    > div {
+      display: inline-flex;
+      align-items: center;
+      flex-wrap: nowrap;
+      //align-items: center;
+      //justify-content: flex-start;
+    }
+
+    &:hover {
+      background-color: #eee;
+    }
+
+    .count {
+      animation: fadein 0s ease-in 75ms forwards;
+    }
+
+    svg {
+      margin-right: 1em;
+      stroke-width: 2;
+      stroke: #274a8a;
+    }
+
+    &.active {
+      background-color: #274a8a;
+      font-weight: 700;
+      color: #fcfcfc;
+
+      svg {
+        stroke-width: 3;
+        stroke: #fcfcfc;
+      }
+    }
+  }
+}
