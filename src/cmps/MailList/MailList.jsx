@@ -17,7 +17,7 @@ export function MailList({ mails = [] }) {
                     )
                 ) : (
                     <div className="flex auto-center p20 gap10 column">
-                        {search.trim() ? <span>No mails found for "{search}"</span> : <span>You don't have any mail, feel lonely?</span>}
+                        {search.trim() ? <span>No mails found for &amp;quot;{search}&amp;quot;</span> : <span>You don&amp;apos;t have any mail, feel lonely?</span>}
                         <button onClick={search.trim() ? clearSearch : navigate(getUrl("/mail/compose"))} className="primary-button">
                             {search.trim() ? "Clear Search" : "Mail a friend"}
                         </button>

@@ -60,8 +60,7 @@ export const MailContextProvider = () => {
         sortAsc,
         toggleSortAsc: (sortProperty) => {
             setSortAsc(prevSortAsc => {
-                const newSortAsc = { ...prevSortAsc, [sortProperty]: !prevSortAsc[sortProperty] }
-                return newSortAsc
+                return { ...prevSortAsc, [sortProperty]: !prevSortAsc[sortProperty] }
             })
         },
         addSortAsc: (sortProperty) => {

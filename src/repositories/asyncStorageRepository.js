@@ -13,7 +13,8 @@ export class AsyncStorage {
     static setItem(key, value) {
         return new Promise((resolve, reject) => {
             try {
-                resolve(localStorage.setItem(key, value));
+                localStorage.setItem(key, value)
+                resolve();
             } catch (error) {
                 reject(error);
             }
@@ -23,7 +24,8 @@ export class AsyncStorage {
     static removeItem(key) {
         return new Promise((resolve, reject) => {
             try {
-                resolve(localStorage.removeItem(key));
+                localStorage.removeItem(key)
+                resolve();
             } catch (error) {
                 reject(error);
             }

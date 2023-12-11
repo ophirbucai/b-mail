@@ -1,5 +1,4 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { useUrl } from "../../hooks/useUrl.jsx";
 import { useMailContext } from "../../context/MailContextProvider.jsx";
 import { useEffect, useState } from "react";
 import { Loading } from "../Layout/Loading/Loading.jsx";
@@ -17,18 +16,20 @@ export function MailDetails() {
     const { removeMail, updateMail, getMailById } = useMailContext()
 
     useEffect(() => {
+        async function loadMail() {
+            try {
+                // const mail = await mailService.getById(mailId)
+                const mail = getMailById(mailId)
+                setMail(mail)
+            } catch (err) {
+                console.log(err);
+            }
+        }
+
         loadMail();
 
-    }, [mailId])
-    async function loadMail() {
-        try {
-            // const mail = await mailService.getById(mailId)
-            const mail = getMailById(mailId)
-            setMail(mail)
-        } catch (err) {
-            console.log(err);
-        }
-    }
+    }, [mailId, getMailById])
+
 
     async function onDelMail() {
         try {

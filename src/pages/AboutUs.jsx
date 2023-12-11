@@ -7,7 +7,7 @@ export function AboutUs() {
             <section className="about-us container">
                 <div className="text-center flex auto-center column gap5 m20">
                     <h2>Attribution</h2>
-                    <p>(B)mail is a free personal mail service that doesn't track you.</p>
+                    <p>{"(B)mail is a free personal mail service that doesn't track you."}</p>
                     <p>This app has been created by Ophir Bucai</p>
                     <section className="container">
                         <ul className="clean-list flex column gap20">
@@ -55,7 +55,7 @@ export function AboutUs() {
             </section>
             <div style={{ backgroundColor: "rgb(235,238,241)", boxShadow: "0 5px 15px rgb(0 0 0 / 5%)" }}>
                 <section className="container text-center">
-                    <img className="m20" src={ctaImage} width="20%" />
+                    <img className="m20" src={ctaImage} width="20%" alt="A woman with a lightbulb" />
                     <h3 className="m10">Have an idea that would make our app even more useful?</h3>
                     <div>
                         <strong>I would love to hear from you!</strong>
