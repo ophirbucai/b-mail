@@ -32,7 +32,7 @@ export function MailPreview({ mail }) {
             <span className="mail-to" title={mail.to}>{mail.to}</span>
             <span className="mail-subject">{mail.subject || <small>(No subject)</small>}</span>
             <span className="mail-content">{mail.body || <small>(No content)</small>}</span>
-            <span className="mail-sent-at">{dayjs(mail.sentAt).fromNow()}</span>
+            <span className="mail-sent-at">{dayjs(mail.sentAt).isBefore(dayjs().subtract(1), "day") ? dayjs(mail.sentAt).format("MMM DD") : dayjs(mail.sentAt).fromNow(true)}</span>
         </li>
     )
 }
