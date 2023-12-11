@@ -13,13 +13,12 @@ export function MailDetails() {
     const navigate = useNavigate()
     const [mail, setMail] = useState(null)
     const { mailId } = useParams()
-    const { removeMail, updateMail, getMailById } = useMailContext()
+    const { removeMail, updateMail } = useMailContext()
 
     useEffect(() => {
         async function loadMail() {
             try {
-                // const mail = await mailService.getById(mailId)
-                const mail = getMailById(mailId)
+                const mail = await mailService.getById(mailId)
                 setMail(mail)
             } catch (err) {
                 console.log(err);
@@ -28,7 +27,7 @@ export function MailDetails() {
 
         loadMail();
 
-    }, [mailId, getMailById])
+    }, [mailId])
 
 
     async function onDelMail() {

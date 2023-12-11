@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, HashRouter, Route, Routes } from "react-router-dom";
 import { HomePage } from "./pages/HomePage.jsx";
 import { AboutUs } from "./pages/AboutUs.jsx";
 import { NotFound } from "./pages/NotFound.jsx";
@@ -11,7 +11,7 @@ import { MailDetails } from "./cmps/MailDetails/MailDetails.jsx";
 export default function App() {
     return (
         <div>
-            <BrowserRouter>
+            <HashRouter>
                 <Routes>
                     <Route path="/" element={<Layout />}>
                         <Route index element={<HomePage />} />
@@ -25,7 +25,7 @@ export default function App() {
                         <Route path="*" element={<NotFound />} />
                     </Route>
                 </Routes>
-            </BrowserRouter>
+            </HashRouter>
         </div>
     );
 }
