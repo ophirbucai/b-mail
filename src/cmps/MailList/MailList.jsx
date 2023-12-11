@@ -1,13 +1,11 @@
 import { MailPreview } from "../MailPreview/MailPreview.jsx";
-import PropTypes from "prop-types";
-import { TMail } from "../../types/TMail.jsx";
 import { useUrl } from "../../hooks/useUrl.jsx";
 import { useMailContext } from "../../context/MailContextProvider.jsx";
 import { useNavigate } from "react-router-dom";
 
-export function MailList({ mails = [] }) {
+export function MailList() {
     const navigate = useNavigate()
-    const { search, clearSearch } = useMailContext()
+    const { search, clearSearch, viewedMail: mails } = useMailContext()
     const { getUrl } = useUrl()
     return (
         <div>
@@ -26,11 +24,4 @@ export function MailList({ mails = [] }) {
             </ul>
         </div>
     )
-}
-
-MailList.defaultProps = {
-    mails: []
-}
-MailList.propTypes = {
-    mails: PropTypes.arrayOf(TMail)
 }

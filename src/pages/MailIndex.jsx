@@ -1,29 +1,33 @@
 import { MailList } from "../cmps/MailList/MailList.jsx";
 import { MailFilter } from "../cmps/MailFilter/MailFilter.jsx";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, useParams } from "react-router-dom";
 import { LucideMail } from "lucide-react";
-import { useMailContext } from "../context/MailContextProvider.jsx";
+import { MailFolderList } from "../cmps/MailFolderList/MailFolderList.jsx";
+import { useUrl } from "../hooks/useUrl.jsx";
 
 export function MailIndex() {
-    const { viewedMail } = useMailContext();
-
+    const { mailId } = useParams()
+    const { getUrl } = useUrl();
     return (
         <>
             <main className="mail-index flex">
-                <aside className="m10">
-                    <section className="bottom-divider m5">
-                        <Link to="/mail/compose" className="primary-button large inline-flex align-center gap5">
-                            <LucideMail size="1em" />
+                <aside>
+                    <section className="mail-index-compose bottom-divider m10">
+                        <Link to={getUrl("/mail/compose")} className="primary-button large inline-flex align-center gap5">
+                            <LucideMail size="1em"/>
                             <span>Compose</span>
                         </Link>
                     </section>
+                    <MailFolderList/>
                 </aside>
-                <div className="p10 full-grow">
-                    <MailFilter />
-                    <MailList mails={viewedMail} />
-                </div>
+                {!mailId ? (
+                    <div className="p10 full-grow">
+                        <MailFilter/>
+                        <MailList/>
+                        <Outlet/>
+                    </div>
+                ) : <Outlet/>}
             </main>
-            <Outlet />
         </>
     )
 }
