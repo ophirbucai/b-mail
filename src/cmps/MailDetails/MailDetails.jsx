@@ -3,18 +3,19 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useMailContext } from "../../context/MailContextProvider.jsx";
 import { useEffect, useState } from "react";
 import { Loading } from "../Layout/Loading/Loading.jsx";
-import { LucideForward, LucideMail, LucideMailOpen, LucideRedo2, LucideReply, LucideTrash2 } from "lucide-react";
+import { LucideForward, LucideMail, LucideMailOpen, LucideReply } from "lucide-react";
 import { mailService } from "../../services/mailService.js";
 import dayjs from "dayjs";
 import { MailStarButton } from "../MailStarButton/MailStarButton.jsx";
 import { useUrl } from "../../hooks/useUrl.jsx";
+import { MailRemoveButton } from "../MailRemoveButton/MailRemoveButton.jsx";
 
 export function MailDetails() {
     const navigate = useNavigate()
     const [mail, setMail] = useState(null)
     const { mailId } = useParams()
     const { getUrl } = useUrl()
-    const { updateMail } = useMailContext()
+    const { updateMail, removeMail } = useMailContext()
 
     useEffect(() => {
         async function loadMail() {
@@ -52,6 +53,16 @@ export function MailDetails() {
         }
     }
 
+    async function onPermanentDeleteMail() {
+        try {
+            await mailService.remove(mail.id);
+            removeMail(mail.id);
+            navigate(getUrl("/mail"));
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
     return (
         <div className="mail-details">
             {mail === null ? <Loading /> : mail ? (
@@ -60,13 +71,7 @@ export function MailDetails() {
                         <button onClick={() => navigate(getUrl("/mail"))} className="back-button simple-button"><span>←</span>{" "}<span>Back</span></button>
                         <button onClick={console.log} disabled className="simple-button tooltip p10"><LucideReply size="1.2em" /><span role="tooltip" hidden>Reply</span></button>
                         <button onClick={console.log} disabled className="simple-button tooltip p10"><LucideForward size="1.2em" /><span role="tooltip" hidden>Forward</span></button>
-                        <button onClick={onToggleRemoveEmail} className="simple-button tooltip p10">
-                            {
-                                mail.removedAt
-                                    ? <><LucideRedo2 size="1.2em" /><span role="tooltip" hidden>Retrieve</span></>
-                                    : <><LucideTrash2 size="1.2em" /><span role="tooltip" hidden>Delete</span></>
-                            }
-                        </button>
+                        <MailRemoveButton mail={mail} onToggleRemoveEmail={onToggleRemoveEmail} onPermanentDeleteMail={onPermanentDeleteMail} />
                         <button onClick={onMarkMailAsUnread} className="simple-button tooltip p10">{mail.isRead ? <LucideMailOpen size="1.1em" /> : <LucideMail size="1.1em" style={{ translate: "0 0.1em" }} />}<span role="tooltip" hidden>Mark As {mail.isRead ? "Unread" : "Read"}</span></button>
                         <MailStarButton mail={mail} onStarMail={(updatedMail) => setMail(updatedMail)} />
                     </div>
