@@ -41,6 +41,7 @@
   .mail-details-body {
     .mail-details-body-content {
       word-break: break-word;
+      white-space: pre-wrap;
       padding: 1em;
       font-size: 1.2em;
       line-height: 1.5em;
